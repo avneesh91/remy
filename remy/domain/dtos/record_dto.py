@@ -1,3 +1,7 @@
+import uuid
+import datetime
+from rich.console import Console
+from rich.table import Table
 from remy.domain.utils.helpers import get_parsed_date
 
 class RecordDTO:
@@ -16,15 +20,30 @@ class RecordDTO:
         pass
 
     @staticmethod
-    def get_topic_dto_from_raw_record(raw_record):
-        intialization_dict = {
-            'row_id': raw_record.get('RowId'),
-            'topic': raw_record.get('Topic'),
-            'sub_category': raw_record.get('Sub-Category'),
-            'category': raw_record.get('Category'),
-            'notes': raw_record.get('Notes'),
-            'learned_on': get_parsed_date('Date'),
-            'last_revised_on': get_parsed_date('Last Revised On')
-        }
+    def get_new_record_dto(topic_name: str) -> RecordDTO:
+        dto = RecordDTO()
+        dto.row_id = str(uuid.uuid4())
+        dto.topic = topic_name
+        dto.learned_on = datetime.datetime.now()
+        return dto
 
-        return RecordDTO(**intialization_dict)
+    @staticmethod
+    def get_table_with_columns(table_heading='New Record Addition'):
+        table = Table(title=table_heading)
+        table.add_column("Row Id", justify="right", style="cyan", no_wrap=True)
+        table.add_column("Topic", style="magenta")
+        table.add_column("Sub-Category", style="magenta")
+        table.add_column("Category", style="magenta")
+        table.add_column("Notes", no_wrap=False)
+        table.add_column("Learned On", style="green")
+        table.add_column("Last Revised On")
+        table.add_column("Confidence Level")
+        return table
+
+    def get_record_table_for_print(self):
+        table = RecordDTO.get_table_with_columns()
+        table.add_row(self.row_id, self.topic, self.sub_category, self.category, self.notes, self.learned_on, self.last_revised_on, self.confidence_level)
+        return table
+
+    def get_record_row_for_table(self, table):
+        pass

@@ -1,7 +1,20 @@
-class TOPICS:
-    DS_ALGO = 'ds_algo'
+TOPIC_NAME_REGEX= r'[A-Za-z0-9_]+'
 
 class TIME_CONSTRAINT:
     TIME_CRUNCH = 'time_crunch'
     HOUR = 'HOUR'
     MORE_THAN_A_HOUR = 'MORE_THAN_A_HOUR'
+
+
+class ENTITY_IDENTIFIERS:
+    LOCAL_STORAGE = 'LOCAL_STORAGE'
+    TOPIC_REVISION_HANDLER = 'TOPIC_REVISION_HANDLER'
+
+class CONFIDENCE_LEVEL:
+    LOW = 'Low'
+    MEDIUM = 'Medium'
+    HIGH = 'High'
+
+    @staticmethod
+    def get_confidence_choices():
+        return [CONFIDENCE_LEVEL.LOW, CONFIDENCE_LEVEL.MEDIUM, CONFIDENCE_LEVEL.HIGH]

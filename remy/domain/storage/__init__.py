@@ -9,7 +9,7 @@ class BaseStorage(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def get_subcategories(self, category: str):
+    def get_subcategories(self, topic:str, category: str):
         pass
 
     @abstractmethod

@@ -95,10 +95,13 @@ class LocalStorage(BaseStorage):
 
 
     def get_categories(self, topic: str):
-        pass
+        dto_list = self._topic_files_dict.get(topic)
+        return list(set([i.category for i in dto_list]))
 
-    def get_subcategories(self, category: str):
-        pass
+    def get_subcategories(self, topic:str, category: str):
+        dto_list = self._topic_files_dict.get(topic)
+        return list(set([i.sub_category for i in dto_list if i.category == category]))
+
 
     def add_record(self, record_dto: RecordDTO):
         curr_topic = record_dto.topic
@@ -115,7 +118,7 @@ class LocalStorage(BaseStorage):
         pass
 
     def get_all_topics(self):
-        pass
+        return self._topic_files_dict.keys()
 
     def add_topic(self, topic_name: str):
         self._add_topic_file(topic_name)
