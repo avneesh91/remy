@@ -73,12 +73,13 @@ class LocalStorage(BaseStorage):
             'category': curr_list[3],
             'notes': curr_list[4],
             'learned_on': curr_list[5],
-            'last_revised_on': curr_list[6]
+            'last_revised_on': curr_list[6],
+            'confidence_level': curr_list[7]
        })
 
 
     def convert_to_raw_record(self, record_dto: RecordDTO):
-        curr_row = ','.join(map(lambda x: str(x), [record_dto.row_id, record_dto.topic, record_dto.sub_category, record_dto.notes, record_dto.learned_on, record_dto.last_revised_on, record_dto.confidence_level]))
+        curr_row = ','.join(map(lambda x: str(x), [record_dto.row_id, record_dto.topic, record_dto.sub_category, record_dto.category,record_dto.notes, record_dto.learned_on, record_dto.last_revised_on, record_dto.confidence_level]))
         return f'{curr_row}\n'
 
     def _write_record_to_file(self, record_dto: RecordDTO):
@@ -118,7 +119,7 @@ class LocalStorage(BaseStorage):
         pass
 
     def get_all_topics(self):
-        return self._topic_files_dict.keys()
+        return list(self._topic_files_dict.keys())
 
     def add_topic(self, topic_name: str):
         self._add_topic_file(topic_name)

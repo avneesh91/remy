@@ -10,4 +10,8 @@ class BaseHandler(metaclass=ABCMeta):
     def run(self):
         pass
 
+    @abstractmethod
+    def get_handler_action(self) -> str:
+        pass
+
 

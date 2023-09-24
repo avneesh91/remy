@@ -1,4 +1,4 @@
-TOPIC_NAME_REGEX= r'[A-Za-z0-9_]+'
+TOPIC_NAME_REGEX= r'^[A-Za-z0-9_]+$'
 
 class TIME_CONSTRAINT:
     TIME_CRUNCH = 'time_crunch'

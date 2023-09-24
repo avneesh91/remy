@@ -20,7 +20,7 @@ class RecordDTO:
         pass
 
     @staticmethod
-    def get_new_record_dto(topic_name: str) -> RecordDTO:
+    def get_new_record_dto(topic_name: str):
         dto = RecordDTO()
         dto.row_id = str(uuid.uuid4())
         dto.topic = topic_name
@@ -30,7 +30,7 @@ class RecordDTO:
     @staticmethod
     def get_table_with_columns(table_heading='New Record Addition'):
         table = Table(title=table_heading)
-        table.add_column("Row Id", justify="right", style="cyan", no_wrap=True)
+        table.add_column("Row Id", style="cyan", no_wrap=True)
         table.add_column("Topic", style="magenta")
         table.add_column("Sub-Category", style="magenta")
         table.add_column("Category", style="magenta")
@@ -42,7 +42,7 @@ class RecordDTO:
 
     def get_record_table_for_print(self):
         table = RecordDTO.get_table_with_columns()
-        table.add_row(self.row_id, self.topic, self.sub_category, self.category, self.notes, self.learned_on, self.last_revised_on, self.confidence_level)
+        table.add_row(self.row_id, self.topic, self.sub_category, self.category, self.notes, str(self.learned_on), str(self.last_revised_on), self.confidence_level)
         return table
 
     def get_record_row_for_table(self, table):

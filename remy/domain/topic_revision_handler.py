@@ -1,5 +1,4 @@
-from domain.dtos.topic_dto import TopicDTO
-from domain.constants import TOPICS, TIME_CONSTRAINT
+from remy.domain.dtos.record_dto import RecordDTO
 
 class TopicRevisionHandler:
 
