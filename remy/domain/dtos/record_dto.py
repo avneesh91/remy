@@ -1,4 +1,6 @@
 import uuid
+import math
+
 import datetime
 from rich.console import Console
 from rich.table import Table
@@ -15,6 +17,10 @@ class RecordDTO:
         self.learned_on = kwargs.get('learned_on')
         self.last_revised_on = kwargs.get('last_revised_on')
         self.confidence_level = kwargs.get('confidence_level')
+
+    def days_since_learned(self) -> int:
+        diff = datetime.datetime.now() - self.learned_on
+        return math.floor(diff.total_seconds()/(60 * 60 * 24))
 
     def update_revised_one(self, time_stamp, sheet: 'SheetObject'):
         pass
@@ -46,4 +52,7 @@ class RecordDTO:
         return table
 
     def get_record_row_for_table(self, table):
-        pass
+        table.add_row(self.row_id, self.topic, self.sub_category, self.category, self.notes, str(self.learned_on), str(self.last_revised_on), self.confidence_level)
+        return table
+
+

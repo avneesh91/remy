@@ -25,3 +25,4 @@ urllib3==1.26.16
 pyfiglet==1.0.2
 questionary==2.0.1
 rich==13.5.2
+PuLP==2.7.0

@@ -4,6 +4,7 @@ from pathlib import Path
 from remy.domain.storage import BaseStorage
 from remy.domain.dtos.record_dto import RecordDTO
 from remy.domain.dtos.record_fetch_dto import RecordFetchDTO
+from remy.domain.utils.helpers import get_parsed_date
 
 class LocalStorage(BaseStorage):
     REMI_TOPIC_INFO_FILE_REGEX = r'\w+.remy'
@@ -72,8 +73,8 @@ class LocalStorage(BaseStorage):
             'sub_category': curr_list[2],
             'category': curr_list[3],
             'notes': curr_list[4],
-            'learned_on': curr_list[5],
-            'last_revised_on': curr_list[6],
+            'learned_on': get_parsed_date(curr_list[5]),
+            'last_revised_on': get_parsed_date(curr_list[6]),
             'confidence_level': curr_list[7]
        })
 
